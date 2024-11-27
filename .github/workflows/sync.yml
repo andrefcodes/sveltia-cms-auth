@@ -1,0 +1,29 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+  
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Fork
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Add Upstream
+      run: git remote add upstream https://github.com/original-username/original-repo.git
+
+    - name: Fetch Upstream
+      run: git fetch upstream
+
+    - name: Merge Changes
+      run: |
+        git checkout main
+        git merge upstream/main
+        git push origin main
