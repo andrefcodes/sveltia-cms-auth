@@ -17,7 +17,7 @@ jobs:
         fetch-depth: 0
 
     - name: Add Upstream
-      run: git remote add upstream https://github.com/original-username/original-repo.git
+      run: git remote add upstream https://github.com/sveltia/sveltia-cms-auth.git
 
     - name: Fetch Upstream
       run: git fetch upstream
